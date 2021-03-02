@@ -11,7 +11,11 @@ app.use(cors());
 app.use(express.json());
 
 const uri = process.env.ATLAS_URI;
-mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true, userCreateIndexes: true });
+mongoose.connect(uri, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useFindAndModify: false,
+});
 
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
@@ -20,11 +24,11 @@ db.once("open", function () {
   console.log("DB connected successfully");
 });
 
-// const exercisesRouter = require('./routes/exercises');
-const usersRouter = require('./routes/users');
+const exercisesRouter = require("./routes/exercises");
+const usersRouter = require("./routes/users");
 
-// app.use('/exercises', exercisesRouter);
-app.use('/users', usersRouter);
+app.use("/exercises", exercisesRouter);
+app.use("/users", usersRouter);
 
 app.listen(port, () => {
   console.log(`Tracker app server running at http://localhost:${port}`);
