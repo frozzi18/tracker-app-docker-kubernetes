@@ -1,5 +1,8 @@
 # Exercise tracker app using MERN
 
+Tha app has capability to track your duration time in the activities.
+
+
 <!-- # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
