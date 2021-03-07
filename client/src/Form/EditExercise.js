@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from "react";
-import Datepicker from "react-datepicker";
 import axios from "axios";
+import React, { useEffect, useState } from "react";
+
+import Datepicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
 
-export default function AddExercise(props) {
+export default function EditExercise(props) {
+  //   const [exerciseId, setExerciseId] = useState(props.match.params.exerId);
+  const exerciseId = props.match.params.exerId;
   const [exercise, setExercise] = useState({
     username: "",
     description: "",
@@ -18,20 +21,35 @@ export default function AddExercise(props) {
   const baseUrl = "http://localhost:5000";
 
   useEffect(() => {
-    axios
-      .get(`${baseUrl}/users`)
-      .then((res) => {
-        setUsers(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    // setExerciseId();
+    // console.log(exerciseId);
+
+    async function fetchData() {
+      const [firstResponse, secondResponse] = await Promise.all([
+        axios.get(`${baseUrl}/users`),
+        axios.get(`${baseUrl}/exercises/${exerciseId}`),
+      ]);
+
+      setUsers(firstResponse.data);
+
+      const newExerciseData = {
+        ...exercise,
+        username: secondResponse.data.username,
+        description: secondResponse.data.description,
+        duration: secondResponse.data.duration,
+        date: new Date(secondResponse.data.date),
+      };
+
+      setExercise(newExerciseData);
+    }
+
+    fetchData();
   }, []);
 
   function handleSubmit(event) {
     event.preventDefault();
     axios
-      .post(`${baseUrl}/exercises/add`, exercise)
+      .post(`${baseUrl}/exercises/update/${exerciseId}`, exercise)
       .then((res) => {
         console.log(res.data);
         props.history.push("/");
@@ -62,7 +80,7 @@ export default function AddExercise(props) {
   return (
     <div className="container">
       <h1>Add Exercise</h1>
-      <form onSubmit={handleSubmit} className=" text-left">
+      <form onSubmit={handleSubmit} className="text-left">
         <div className="form-group">
           <label className="font-weight-bold">Username</label>
           <select
@@ -104,12 +122,15 @@ export default function AddExercise(props) {
             <Datepicker type="number" selected={date} onChange={handleDate} />
           </div>
         </div>
-        <div className="text-center">
-          <button type="submit" className="btn btn-primary">
-            Submit
-          </button>
-        </div>
+        <button type="submit" className="btn btn-primary">
+          Submit
+        </button>
       </form>
+      {/* <div className="border border-primary mt-5">
+        {JSON.stringify(exercise)}
+        <div></div>
+        {JSON.stringify(users)}
+      </div> */}
     </div>
   );
 }

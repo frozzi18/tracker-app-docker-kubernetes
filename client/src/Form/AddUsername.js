@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-export default function AddUsername() {
+export default function AddUsername(props) {
   const [username, setUsername] = useState("");
   const baseUrl = "http://localhost:5000";
 
@@ -17,6 +17,7 @@ export default function AddUsername() {
       .post(`${baseUrl}/users/add`, { username })
       .then((response) => {
         console.log(response.data);
+        props.history.push("/");
       })
       .catch((err) => {
         console.log(err);
@@ -41,7 +42,6 @@ export default function AddUsername() {
           </button>
         </div>
       </form>
-      {username}
     </div>
   );
 }

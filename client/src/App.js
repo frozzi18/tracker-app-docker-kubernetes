@@ -5,6 +5,8 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Navbar from "./Components/Navbar";
 import AddUsername from "./Form/AddUsername";
 import AddExercise from "./Form/AddExercise";
+import ExerciseList from "./Components/ExerciseList";
+import EditExercise from "./Form/EditExercise";
 
 function App() {
   return (
@@ -13,14 +15,13 @@ function App() {
         <Navbar />
         <Switch>
           <Route path="/" exact>
-            <h1>Hello</h1>
+            <ExerciseList />
           </Route>
-          <Route path="/username/add">
-            <AddUsername />
-          </Route>
-          <Route path="/exercise/add">
-            <AddExercise />
-          </Route>
+          <Route path="/username/add" component={AddUsername} />
+
+          <Route path="/exercise/add" component={AddExercise} />
+
+          <Route path="/exercises/update/:exerId" component={EditExercise} />
         </Switch>
       </Router>
     </div>
