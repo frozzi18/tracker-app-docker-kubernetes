@@ -2,6 +2,7 @@
 
 Tha app has capability to track your duration time in the activities.
 
+It can be accessed with this [link](https://competent-davinci-1225c2.netlify.app/)
 
 <!-- # Getting Started with Create React App
 
