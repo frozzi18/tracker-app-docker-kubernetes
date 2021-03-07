@@ -15,7 +15,7 @@ export default function AddExercise(props) {
   const { username, description, duration, date } = exercise;
 
   const [users, setUsers] = useState([]);
-  const baseUrl = "http://localhost:5000";
+  const baseUrl = "https://my-tracker-application.herokuapp.com";
 
   useEffect(() => {
     axios

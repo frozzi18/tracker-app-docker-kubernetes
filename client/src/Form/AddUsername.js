@@ -3,7 +3,7 @@ import axios from "axios";
 
 export default function AddUsername(props) {
   const [username, setUsername] = useState("");
-  const baseUrl = "http://localhost:5000";
+  const baseUrl = "https://my-tracker-application.herokuapp.com";
 
   function handleChange(event) {
     setUsername(event.target.value);

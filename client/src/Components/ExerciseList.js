@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 export default function ExerciseList() {
   const [exercises, setExercises] = useState([]);
-  const baseUrl = "http://localhost:5000";
+  const baseUrl = "https://my-tracker-application.herokuapp.com";
 
   useEffect(() => {
     axios
