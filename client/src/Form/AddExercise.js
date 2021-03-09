@@ -15,11 +15,13 @@ export default function AddExercise(props) {
   const { username, description, duration, date } = exercise;
 
   const [users, setUsers] = useState([]);
-  const baseUrl = "https://my-tracker-application.herokuapp.com";
+  // const baseUrl = "https://my-tracker-application.herokuapp.com";
+  const baseUrl = "http://localhost:5000";
+
 
   useEffect(() => {
     axios
-      .get(`${baseUrl}/users`)
+      .get(`${baseUrl}/api/users`)
       .then((res) => {
         setUsers(res.data);
       })
@@ -31,7 +33,7 @@ export default function AddExercise(props) {
   function handleSubmit(event) {
     event.preventDefault();
     axios
-      .post(`${baseUrl}/exercises/add`, exercise)
+      .post(`${baseUrl}/api/exercises/add`, exercise)
       .then((res) => {
         console.log(res.data);
         props.history.push("/");

@@ -4,18 +4,19 @@ import { Link } from "react-router-dom";
 
 export default function ExerciseList() {
   const [exercises, setExercises] = useState([]);
-  const baseUrl = "https://my-tracker-application.herokuapp.com";
+  // const baseUrl = "https://my-tracker-application.herokuapp.com";
+  const baseUrl = "http://localhost:5000";
 
   useEffect(() => {
     axios
-      .get(`${baseUrl}/exercises`)
+      .get(`${baseUrl}/api/exercises`)
       .then((res) => {
         setExercises(res.data);
       })
       .catch((err) => {
         console.log(err);
       });
-  }, [exercises]);
+  }, []);
 
   function handleDelete(id) {
     axios
@@ -30,7 +31,7 @@ export default function ExerciseList() {
 
   return (
     <div className="container">
-      <h1 className="mb-5">Exercise List</h1>
+      <h1 className="mb-5">Your Exercise List</h1>
       <ul className="list-group text-left">
         {exercises.length ? (
           exercises.map((exercise) => (

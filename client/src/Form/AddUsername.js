@@ -3,7 +3,9 @@ import axios from "axios";
 
 export default function AddUsername(props) {
   const [username, setUsername] = useState("");
-  const baseUrl = "https://my-tracker-application.herokuapp.com";
+  // const baseUrl = "https://my-tracker-application.herokuapp.com";
+  const baseUrl = "http://localhost:5000";
+
 
   function handleChange(event) {
     setUsername(event.target.value);
@@ -14,7 +16,7 @@ export default function AddUsername(props) {
     console.log(username);
 
     axios
-      .post(`${baseUrl}/users/add`, { username })
+      .post(`${baseUrl}/api/users/add`, { username })
       .then((response) => {
         console.log(response.data);
         props.history.push("/");
