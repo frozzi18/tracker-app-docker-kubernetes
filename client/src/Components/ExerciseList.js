@@ -5,11 +5,11 @@ import { Link } from "react-router-dom";
 export default function ExerciseList() {
   const [exercises, setExercises] = useState([]);
   // const baseUrl = "https://my-tracker-application.herokuapp.com";
-  const baseUrl = "http://localhost:5000";
+  // const baseUrl = "http://localhost:5000";
 
   useEffect(() => {
     axios
-      .get(`${baseUrl}/api/exercises`)
+      .get("/api/exercises")
       .then((res) => {
         setExercises(res.data);
       })
@@ -20,7 +20,7 @@ export default function ExerciseList() {
 
   function handleDelete(id) {
     axios
-      .delete(`${baseUrl}/exercises/${id}`)
+      .delete("/exercises/${id}")
       .then((res) => {
         console.log(res);
       })

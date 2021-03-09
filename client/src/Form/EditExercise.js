@@ -19,7 +19,7 @@ export default function EditExercise(props) {
 
   const [users, setUsers] = useState([]);
   // const baseUrl = "https://my-tracker-application.herokuapp.com";
-  const baseUrl = "http://localhost:5000";
+  // const baseUrl = "http://localhost:5000";
 
   useEffect(() => {
     // setExerciseId();
@@ -27,8 +27,8 @@ export default function EditExercise(props) {
 
     async function fetchData() {
       const [firstResponse, secondResponse] = await Promise.all([
-        axios.get(`${baseUrl}/api/users`),
-        axios.get(`${baseUrl}/api/exercises/${exerciseId}`),
+        axios.get('/api/users'),
+        axios.get(`/api/exercises/${exerciseId}`),
       ]);
 
       setUsers(firstResponse.data);
@@ -50,7 +50,7 @@ export default function EditExercise(props) {
   function handleSubmit(event) {
     event.preventDefault();
     axios
-      .post(`${baseUrl}/api/exercises/update/${exerciseId}`, exercise)
+      .post(`/api/exercises/update/${exerciseId}`, exercise)
       .then((res) => {
         console.log(res.data);
         props.history.push("/");

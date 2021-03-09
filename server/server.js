@@ -27,8 +27,8 @@ db.once("open", function () {
 const exercisesRouter = require("./routes/exercises");
 const usersRouter = require("./routes/users");
 
-app.use("/api/exercises", exercisesRouter);
-app.use("/api/users", usersRouter);
+app.use("/exercises", exercisesRouter);
+app.use("/users", usersRouter);
 
 app.listen(port, () => {
   console.log(`Tracker app server running at http://localhost:${port}`);
