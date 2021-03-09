@@ -8,18 +8,10 @@ export default function Navbar() {
         <Link to="/" className="navbar-brand pl-3">
           Home
         </Link>
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarNavAltMarkup"
-          aria-controls="navbarNavAltMarkup"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
+        <button className="navbar-toggler" type="button">
           <span className="navbar-toggler-icon"></span>
         </button>
-        <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div className="collapse navbar-collapse">
           <div className="navbar-nav">
             <Link to="/username/add" className="nav-link">
               Adding Username
