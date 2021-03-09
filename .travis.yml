@@ -20,3 +20,12 @@ after_success:
   - docker push frozzi18/tracker-client
   - docker push frozzi18/tracker-nginx
   - docker push frozzi18/tracker-server
+
+
+deploy:
+  provider: heroku
+  api_key:
+    secure: $HEROKU_KEY
+  app: tracker-app-docker-heroku
+  on: 
+    branch: master
