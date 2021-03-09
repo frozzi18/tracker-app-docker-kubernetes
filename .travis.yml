@@ -20,12 +20,18 @@ after_success:
   - docker push frozzi18/tracker-client
   - docker push frozzi18/tracker-nginx
   - docker push frozzi18/tracker-server
+  # deploy to heroku
+  - wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh
+  - heroku plugins:install @heroku-cli/plugin-container-registry
+  - docker login --username _ --password=$HEROKU_API_KEY registry.heroku.com
+  - heroku container:push tracker-client tracker-nginx tracker-server --app $HEROKU_APP_NAME
+  - heroku container:release tracker-client tracker-nginx tracker-server --app $HEROKU_APP_NAME
 
 
-deploy:
-  provider: heroku
-  api_key:
-    secure: $HEROKU_KEY
-  app: tracker-app-docker-heroku
-  on: 
-    branch: master
+# deploy:
+#   provider: heroku
+#   api_key:
+#     secure: $HEROKU_KEY
+#   app: tracker-app-docker-heroku
+#   on: 
+#     branch: master
