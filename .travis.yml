@@ -1,0 +1,22 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t frozzi18/react-test -f ./client/Dockerfile.dev ./client
+  # - docker build run other test
+  
+script:
+  - docker run -e CI=true frozzi18/react-test npm test
+  # Run other test, put here
+
+after_success:
+  - docker build -t frozzi18/tracker-client ./client
+  - docker build -t frozzi18/tracker-nginx ./nginx
+  - docker build -t frozzi18/tracker-server ./server
+  # Log in to docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # Take those image and push them to docker hub
+  - docker push frozzi18/tracker-client
+  - docker push frozzi18/tracker-nginx
+  - docker push frozzi18/tracker-server
