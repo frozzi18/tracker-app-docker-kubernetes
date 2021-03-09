@@ -19,6 +19,7 @@ services:
       - ./server:/app
     environment:
       - ATLAS_URI=mongodb+srv://rozzi123:rozzi123@mern-backend.es7f0.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
+      - CHOKIDAR_USEPOLLING=true
   client:
     stdin_open: true
     build:

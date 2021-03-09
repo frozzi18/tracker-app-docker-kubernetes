@@ -20,7 +20,7 @@ export default function ExerciseList() {
 
   function handleDelete(id) {
     axios
-      .delete("/exercises/${id}")
+      .delete(`/exercises/${id}`)
       .then((res) => {
         console.log(res);
       })
