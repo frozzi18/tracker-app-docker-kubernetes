@@ -19,8 +19,7 @@ script:
 
   
 
-# after_success:
-  
+# after_success:  
 #   - docker build -t frozzi18/web ./nginx
 #   - docker build -t frozzi18/tracker_server ./server
   
