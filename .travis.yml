@@ -12,21 +12,21 @@ script:
 
 after_success:
   - docker build -t frozzi18/tracker_client ./client
-  - docker build -t frozzi18/tracker_nginx ./nginx
+  - docker build -t frozzi18/web ./nginx
   - docker build -t frozzi18/tracker_server ./server
   # Log in to docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # Take those image and push them to docker hub
   - docker push frozzi18/tracker_client
-  - docker push frozzi18/tracker_nginx
+  - docker push frozzi18/web
   - docker push frozzi18/tracker_server
   # deploy to heroku
   - wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh
   - heroku plugins:install @heroku-cli/plugin-container-registry
   - docker login --username _ --password=$HEROKU_API_KEY registry.heroku.com
-  - heroku container:push tracker_client tracker_nginx tracker_server --recursive --app $HEROKU_APP_NAME
-  - heroku container:release tracker_client tracker_nginx tracker_server --app $HEROKU_APP_NAME
-  - heroku ps:scale tracker_client=1 tracker_nginx=1 tracker_server=1 --app $HEROKU_APP_NAME
+  - heroku container:push tracker_client web tracker_server --recursive --app $HEROKU_APP_NAME
+  - heroku container:release tracker_client web tracker_server --app $HEROKU_APP_NAME
+  - heroku ps:scale tracker_client=1 web=1 tracker_server=1 --app $HEROKU_APP_NAME
 
 
 # deploy:
